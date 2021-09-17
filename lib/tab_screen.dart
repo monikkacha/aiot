@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:aiot/app_images.dart';
@@ -7,7 +6,9 @@ import 'package:aiot/gloabl_widgets.dart';
 import 'package:aiot/winning_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class TabScreen extends StatelessWidget {
   var scoreList = [
@@ -26,7 +27,7 @@ class TabScreen extends StatelessWidget {
           Column(
             children: [
               Container(
-                height: 150.0,
+                width: 280.0,
                 child: Row(
                   children: [
                     GlobalWidgets.winningBoardProfile(
@@ -41,7 +42,7 @@ class TabScreen extends StatelessWidget {
                         name: "John Doe"),
                     GlobalWidgets.winningBoardProfile(
                         state: WINNING_STATE.DOWN,
-                        number: "4",
+                        number: "3",
                         image: AppImages.image_3,
                         name: "John Brown"),
                   ],
@@ -49,12 +50,12 @@ class TabScreen extends StatelessWidget {
               ),
               Container(
                 height: 200.0,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                child: Stack(
+                  alignment: Alignment.center,
                   children: [
-                    GlobalWidgets.bar(height: 60.0, count: "60"),
-                    GlobalWidgets.bar(height: 120.0, count: "120"),
-                    GlobalWidgets.bar(height: 80.0, count: "80"),
+                    Image.asset(AppImages.bar_png),
+                    GlobalWidgets.scoreBoard(
+                        firstRank: "38", secondRank: "34", thirdRank: "29"),
                   ],
                 ),
               ),

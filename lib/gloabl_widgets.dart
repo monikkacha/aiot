@@ -49,12 +49,16 @@ class GlobalWidgets {
       @required var number,
       @required var image,
       @required var name}) {
+    var height = 12.0;
+    if (number == "2") height = 50.0;
+    if (number == "3") height = 30.0;
+
     return Expanded(
         child: Column(
       children: [
         Visibility(
           child: SizedBox(
-            height: 12.0,
+            height: height,
           ),
           visible: state == WINNING_STATE.DOWN || state == WINNING_STATE.UP,
         ),
@@ -69,12 +73,6 @@ class GlobalWidgets {
         Visibility(
           child: Icon(Icons.arrow_drop_up),
           visible: state == WINNING_STATE.UP,
-        ),
-        Visibility(
-          child: SizedBox(
-            height: 6.0,
-          ),
-          visible: state != WINNING_STATE.WINNER,
         ),
         Visibility(
           child: Image.asset(
@@ -112,4 +110,84 @@ class GlobalWidgets {
       ],
     ));
   }
+
+  static Widget scoreBoard(
+      {required var firstRank,
+      required var secondRank,
+      required var thirdRank}) {
+    var firstRankHeight = 30.0;
+    var secondRankHeight = 60.0;
+    var thirdRankHeight = 100.0;
+
+    return Container(
+      width: 260.0,
+      child: Row(
+        children: [
+          _singleBarScore(thirdRank, thirdRankHeight),
+          _singleBarScore(firstRank, firstRankHeight),
+          _singleBarScore(secondRank, secondRankHeight),
+        ],
+      ),
+    );
+  }
+
+  static Widget _singleBarScore(var score, var top) {
+    return Expanded(
+        child: Padding(
+      padding: EdgeInsets.only(top: top),
+      child: Column(
+        children: [
+          Text(
+            score,
+            style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+          ),
+          Text("Showings")
+        ],
+        crossAxisAlignment: CrossAxisAlignment.center,
+      ),
+    ));
+  }
+
+// Expanded(
+// child: Padding(
+// padding: const EdgeInsets.only(top: 100.0),
+// child: Column(
+// children: [
+// Text(
+// thirdRank,
+// style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+// ),
+// Text("Showing")
+// ],
+// crossAxisAlignment: CrossAxisAlignment.center,
+// ),
+// )),
+// Expanded(
+// child: Padding(
+// padding: const EdgeInsets.only(top: 30.0),
+// child: Column(
+// children: [
+// Text(
+// firstRank,
+// style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+// ),
+// Text("Showing")
+// ],
+// crossAxisAlignment: CrossAxisAlignment.center,
+// ),
+// )),
+// Expanded(
+// child: Padding(
+// padding: const EdgeInsets.only(top: 60.0),
+// child: Column(
+// children: [
+// Text(
+// secondRank,
+// style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+// ),
+// Text("Showing")
+// ],
+// crossAxisAlignment: CrossAxisAlignment.center,
+// ),
+// )),
 }
